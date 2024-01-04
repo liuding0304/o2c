@@ -1,0 +1,14 @@
+{
+  "name": "options2composition",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ding",
+  "license": "ISC"
+}
