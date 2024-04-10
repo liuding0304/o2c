@@ -2,11 +2,12 @@
 
 import * as t from "@babel/types";
 import traverse from "@babel/traverse";
-import { beforeExportDefault, buildAst, insertComment, toArrowFuncAstByObjectProperty } from '../utils/index.js';
+import { insertAstAfterImportDeclaration, buildAst, insertComment, toArrowFuncAstByObjectProperty } from '../utils/index.js';
 
 export default {
   transform(ctx) {
     const ast = ctx.getScriptAst('ast');
+    const scriptAst = ctx.getScriptAst();
     traverse.default(ast, {
       ThisExpression(path) {
         if (t.isIdentifier(path.parent.property, { name: '$emit'})) {
@@ -25,11 +26,13 @@ export default {
                 emitEventNameArr.node.elements.unshift(t.stringLiteral(emitEventName))
               }
             } else {
-              beforeExportDefault(path, buildAst(`const emit = defineEmits(['${emitEventName}'])`))
+              insertAstAfterImportDeclaration(scriptAst, buildAst(`const emit = defineEmits(['${emitEventName}'])`))
             }
           } else {
             insertComment(callStatementPath.node, 'emit—事件名称无法识别', true)
           }
+
+          // beforeExportDefault(path, buildAst(`const emit = defineEmits(['${emitEventName}'])`))
         }
       },
     });

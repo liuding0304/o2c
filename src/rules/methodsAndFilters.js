@@ -44,6 +44,16 @@ function transformMethodOrFilters(ctx, type) {
           })
           addUseStore(scriptAst)
         }
+
+        const mapMutationsCodeMap = transVuexMap('mapMutations', methodNode)
+
+        if(mapMutationsCodeMap.length) {
+          mapMutationsCodeMap.forEach(({key, code}) => {
+            ctx.collectMeta('methods', key)
+            node.before(code)
+          })
+          addUseStore(scriptAst)
+        }
       }
 
     });

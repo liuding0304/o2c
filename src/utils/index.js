@@ -90,6 +90,10 @@ export function insertDefineEmits(path, eventName) {
 
 }
 
+export function insertAstAfterImportDeclaration(scriptAst, ast) {
+  const firstStatementIndex = scriptAst.value.program.body.findIndex(n => !t.isImportDeclaration(n))
+  scriptAst.value.program.body.splice(firstStatementIndex, 0, ast)
+}
 
 /**
  * 构建函数表达式

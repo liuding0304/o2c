@@ -11,8 +11,28 @@ const generateVuexCompositionCode = (type,{namespace, key, value, funcCode} ) =>
   if (type === 'mapActions') {
     return generateActionsCompositionCode({namespace, key, value, funcCode})
   }
+  if (type === 'mapMutations') {
+    return generateMutationsCompositionCode({namespace, key, value, funcCode})
+  }
 }
 
+const generateMutationsCompositionCode = ({namespace, key, value, funcCode}) => {
+  if (funcCode) {
+    // if (namespace) {
+    //   namespace = '.' + namespace.split('/').join('.')
+    // }
+    // return `const ${key} = computed(() => (${funcCode})(store.${typeName}${namespace}));`
+  } else if (value) {
+    let dispatchArgs = ''
+    if (namespace) {
+      dispatchArgs = `${namespace}/${value}`
+    }else {
+      dispatchArgs = value
+    }
+    return `const ${key} = (...args) => store.commit('${dispatchArgs}', ...args);\n`
+  }
+  return ''
+}
 const generateActionsCompositionCode = ({namespace, key, value, funcCode}) => {
   if (funcCode) {
     // if (namespace) {

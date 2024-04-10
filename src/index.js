@@ -3,7 +3,7 @@ import parser from "@babel/parser";
 import gogocode from 'gogocode';
 import rules from './rules/index.js';
 
-// import toSFCString from './generate/index.js';
+import toSFCString from './generate/index.js';
 
 
 
@@ -41,7 +41,7 @@ function createCtx(SFCDescriptor) {
   }
 }
 
-export default function o2c(code) {
+export default function o2c(code, config = {}) {
   // todo： parse 似乎会按文件名缓存parse结果
   // let { descriptor: SFCDescriptor, errors } = parse(code, { filename:Math.random().toString(36).slice(2) });
   // if (errors[0]) {
@@ -50,12 +50,12 @@ export default function o2c(code) {
 
   const SFCDescriptor = gogocode(code, { parseOptions: { language: 'vue' } });
 
-  const useRules = rules;
+  const useRules = rules.concat(config.rules || []);
   let ctx = createCtx(SFCDescriptor)
 
   useRules.forEach(( rule )=> {
-    rule.transform && rule.transform(ctx, rule)
+    rule.transform && rule.transform(ctx)
   })
-  // return toSFCString(SFCDescriptor.node, { scriptSetupAst: ctx.getScriptAst('ast') })
-  return SFCDescriptor.generate()
+  return toSFCString(SFCDescriptor.node, { scriptSetupAst: ctx.getScriptAst('ast') })
+  // return SFCDescriptor.generate()
 }

@@ -26,8 +26,8 @@ export default {
           value: contentStr,
         } =  match.value[index];
         if (/^\$route(\.|$)/.test(keyName)) {
-          // $route.a => route.value.a; $route => route.value
-          keyName = keyName.replace(/^\$route(\.|$)/, 'route.value$1')
+          // keyName = keyName.replace(/^\$route(\.|$)/, 'route.value$1')
+          keyName = keyName.replace(/^\$/, '')
           addUseVueRouter(scriptAst, 'route')
         } else {
           if (/\./.test(keyName)) {
@@ -60,7 +60,7 @@ export default {
             node.before(`watch(() => ${keyName}, ${arrowFuncCode});\n`)
           }
         } else {
-          contentStr = contentStr.replace(/^[a-zA-Z0-9]+\(/, 'function(')
+          contentStr = contentStr.replace(/^.+\(/, 'function(')
           node.before(`watch(() => ${keyName}, ${contentStr});\n`)
         }
       })

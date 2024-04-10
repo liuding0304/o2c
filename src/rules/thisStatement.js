@@ -1,5 +1,5 @@
 
-import { addDefineExpose, removeVueOption, importVueProperty, arrowFuncCodeByObjectProperty, arrowFuncAstByObjectProperty, insertAstAfterImportDeclaration, addUseVueRouter } from "../utils/vue-util.js";
+import { addDefineExpose, removeVueOption, importVueProperty, arrowFuncCodeByObjectProperty, arrowFuncAstByObjectProperty, insertAstAfterImportDeclaration, addUseVueRouter, addUseStore } from "../utils/vue-util.js";
 import gogocode from 'gogocode';
 import babelParser from '@babel/parser'
 import generate from "@babel/generator";
@@ -48,6 +48,11 @@ export default {
             t.identifier(propertyName),
           );
           addUseVueRouter(scriptAst, propertyName)
+        } else if (propertyName === '$store') {
+          node.replaceBy(
+            t.identifier('store'),
+          );
+          addUseStore(scriptAst)
         }  else if (['$nextTick', '$set', '$delete'].includes(propertyName)) {
           // nextTick  set delete
           node.replaceBy(

@@ -20,10 +20,10 @@ const rules = [
   watch,
   methodsAndFilters,
   lifeCycle,
+  emit,
 
   // expose,
 
-  emit,
   thisStatement,
   removeExport,
   // script,
