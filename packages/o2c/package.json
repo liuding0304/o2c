@@ -1,0 +1,41 @@
+{
+  "name": "options2composition",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "nodemon ./example/app.js"
+  },
+  "bin": {
+    "o2c": "./bin/o2c.js"
+  },
+  "author": "ding",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/code-frame": "~7.23.4",
+    "@babel/core": "~7.23.3",
+    "@babel/generator": "~7.23.4",
+    "@babel/parser": "~7.23.4",
+    "@babel/runtime": "~7.23.4",
+    "@babel/template": "~7.22.15",
+    "@babel/traverse": "~7.23.4",
+    "@babel/types": "~7.23.4",
+    "@vue/compiler-dom": "~3.3.8",
+    "@vue/compiler-sfc": "^3.0.5",
+    "acorn": "~8.11.2",
+    "body-parser": "^1.20.2",
+    "commander": "^12.0.0",
+    "express": "^4.18.2",
+    "gogocode": "^1.0.55",
+    "jest": "29.3.1",
+    "prettier": "^3.1.0",
+    "vue-sfc-descriptor-to-string": "^2.0.0"
+  },
+  "devDependencies": {
+    "recast": "^0.23.4"
+  }
+}

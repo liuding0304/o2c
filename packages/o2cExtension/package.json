@@ -1,0 +1,46 @@
+{
+  "name": "optionsapi2compositionapi",
+  "displayName": "optionsApi2compositionApi",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "optionsapi2compositionapi.transform",
+        "title": "Options转Composition API"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "optionsapi2compositionapi.transform"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "pnpm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "cosmiconfig": "^9.0.0"
+  }
+}
