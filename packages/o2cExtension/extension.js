@@ -75,7 +75,8 @@ function activate(context) {
     const configFilePath = findConfigFile(uri.fsPath)
     const config = getConfigByFile(configFilePath).config
     if (isFile) {
-      transFile(uri.fsPath, config);
+      console.log('config', config)
+      // transFile(uri.fsPath, config);
     } else {
       walkSync(uri.fsPath, async (filePath) => {
         try {
