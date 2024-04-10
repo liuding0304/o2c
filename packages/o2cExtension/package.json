@@ -1,10 +1,17 @@
 {
   "name": "o2c-extension",
+  "publisher": "liuding",
   "displayName": "optionsApi2compositionApi",
   "description": "",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.85.0"
+  },
+  "scripts": {
+    "package": "pnpm vsce package --no-dependencies",
+    "lint": "eslint .",
+    "pretest": "pnpm run lint",
+    "test": "vscode-test"
   },
   "categories": [
     "Other"
@@ -25,11 +32,6 @@
         }
       ]
     }
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "pretest": "pnpm run lint",
-    "test": "vscode-test"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
